@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 
-class DishDetail extends Component{
 
-  
 // If you click a card 
 
-    renderDish(dish){
+    function renderDish(dish){
         if(dish != null){
             return(
                 <div className="col-12 col-md-5 m-1">
@@ -33,7 +31,7 @@ class DishDetail extends Component{
     The key should be unique and key should be from data, 
     if your data doesn't contain unique id per object then use index as a key
     */
-    renderComments(dish){
+    function renderComments(dish){
         if(dish != null){
             return(
                 <div className="col-12 col-md-5 m-1">
@@ -44,7 +42,8 @@ class DishDetail extends Component{
                      <div>
                          
                          <CardText className="CardText" >{comments.comment}</CardText>
-                         <CardText className="CardText alert-warning px-2 auth">--    {comments.author},     {comments.date}</CardText>
+                         <CardText className="CardText alert-warning px-2 auth">--    {comments.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comments.date)))}
+                         </CardText>
                         
                          </div>       
                     )}
@@ -65,9 +64,11 @@ class DishDetail extends Component{
         
     }
    
-    render(){
+    const DishDetail = (props) => {
         
-        const selectedDish = this.props.dish
+        console.log('Dishdeatail Component render is invoked')
+
+        const selectedDish = props.dish
 
         return(
 
@@ -76,8 +77,8 @@ class DishDetail extends Component{
                <div className="row">
                    {DishDetail}
            
-               {this.renderDish(selectedDish)}
-               {this.renderComments(selectedDish)}
+               {renderDish(selectedDish)}
+               {renderComments(selectedDish)}
                </div>
                </div>
         
@@ -86,6 +87,6 @@ class DishDetail extends Component{
    }
 
 
-}
+
 
 export default DishDetail;
